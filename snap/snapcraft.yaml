@@ -1,0 +1,21 @@
+name: websockify
+base: core18 # the base snap is the execution environment for this snap
+version: 'git-latest'
+summary: WebSockets support for any application/server
+description: |
+    At the most basic level, websockify just translates WebSockets traffic to normal socket traffic. Websockify accepts the WebSockets handshake, parses it, and then begins forwarding traffic between the client and the target in both directions.
+    websockify was formerly named wsproxy and was part of the noVNC project.
+
+grade: stable # must be 'stable' to release into candidate/stable channels
+confinement: strict # use 'strict' once you have the right plugs and slots
+
+parts:
+    websockify:
+        source: https://github.com/novnc/websockify
+        plugin: python
+        source-type: git
+        build-packages:
+            - git
+apps:
+    websockify:
+        command: bin/websockify
